@@ -1,0 +1,64 @@
+﻿@model DowntownCarClub.Web.Dtos.SignInDto
+@{
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+    ViewData["Title"] = "Sign in - Downtown Car Club";
+}
+
+<div class="container">
+    <div class="row margin-bottom">
+        <div class="col">
+            <h1 class="font-lg font-normal text-center">
+                Sign in to
+                <br />
+                <i>
+                    DowntownCarClub
+                </i>
+            </h1>
+        </div>
+    </div>
+    <div class="row margin-bottom">
+        <div class="col">
+            <form class="box" asp-action="SignIn" method="post">
+                <div class="form-group form-group--full-width">
+                    <label>Username</label>
+                    <input type="text" asp-for="UserName" tabindex="1" autofocus required />
+                </div>
+                <div class="form-group form-group--full-width">
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <label>Password</label>
+                        </div>
+                        @*<div class="col-auto">
+                            <span class="font-xsm">
+                                <a href="#" class="link">
+                                    Forgot password?
+                                </a>
+                            </span>
+                        </div>*@
+                    </div>
+                    <input type="password" asp-for="Password" tabindex="2" required />
+                </div>
+                <div class="form-group form-group--full-width">
+                    <button class="btn" type="submit">Sign in</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group text-center">
+                <span class="font-sm">
+                    New here?
+                    <a class="link" asp-action="SignUp">Create an account</a>.
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 350px;
+        margin-top: 60px;
+    }
+</style>

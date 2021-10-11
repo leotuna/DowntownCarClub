@@ -1,0 +1,40 @@
+﻿@model DowntownCarClub.Web.Dtos.UserCardDto
+@{
+    var questions = Model.Questions == 1 ? "1 question" : $"{Model.Questions} questions";
+    var answers = Model.Answers == 1 ? "1 answer" : $"{Model.Answers} answers";
+}
+@if (Model.UserIsLoggedIn)
+{
+    <div class="box">
+        <div class="row">
+            <div class="col">
+                <span class="font-md">Hey!</span>
+            </div>
+        </div>
+        <div class="row justify-content-center margin-bottom-01">
+            <div class="col">
+                <span class="font-sm">
+                    @@<a class="link" asp-controller="User" asp-action="Details" asp-route-userName="@Model.UserName">@Model.UserName</a>
+                </span>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col">
+                <span class="font-sm">@questions</span>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col">
+                <span class="font-sm">@answers</span>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="box">
+        <p>
+            <a class="link" asp-controller="Auth" asp-action="SignUp">Create an account</a> if you want to ask or answer questions about cars
+        </p>
+    </div>
+}

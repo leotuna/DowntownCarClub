@@ -1,0 +1,83 @@
+﻿@model DowntownCarClub.Web.Dtos.UserDto
+@{
+    ViewData["Title"] = $"User {Model.UserName} - Downtown Car Club";
+    var questions = Model.QuestionQuantity == 1 ? "1 question" : $"{Model.QuestionQuantity} questions";
+    var answers = Model.AnswerQuantity == 1 ? "1 answer" : $"{Model.AnswerQuantity} answers";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-lg-4">
+            <div class="row margin-bottom">
+                <div class="col">
+                    <div class="container">
+                        <div class="row justify-content-start margin-bottom-01">
+                            <h1 class="font-lg font-normal">@Model.UserName</h1>
+                        </div>
+                        <div class="row justify-content-start margin-bottom-02">
+                            <span class="font-sm">@questions</span>
+                        </div>
+                        <div class="row justify-content-start margin-bottom">
+                            <span class="font-sm">@answers</span>
+                        </div>
+                        @if (Model.UserCanLogOut)
+                        {
+                            <div class="row justify-content-start margin-bottom">
+                                <span class="font-sm">
+                                    <a class="link color-danger" asp-controller="Auth" asp-action="LogOut">
+                                        Log out
+                                    </a>
+                                </span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-8">
+            <div class="row margin-bottom">
+                <div class="col">
+                    <h2 class="font-md font-normal">
+                        Questions
+                    </h2>
+                </div>
+            </div>
+            @if (Model.QuestionQuantity == 0)
+            {
+                <p class="font-sm">
+                    No questions yet.
+                </p>
+            }
+            @foreach (var item in Model.Questions)
+            {
+                <div class="row margin-bottom">
+                    <div class="col">
+                        <partial name="_question" model="@item" />
+                    </div>
+                </div>
+            }
+            <div class="row margin-bottom-2">
+            </div>
+            <div class="row margin-bottom">
+                <div class="col">
+                    <h2 class="font-md font-normal">
+                        Answers
+                    </h2>
+                </div>
+            </div>
+            @if (Model.AnswerQuantity == 0)
+            {
+                <p class="font-sm">
+                    No answers yet.
+                </p>
+            }
+            @foreach (var item in Model.Answers)
+            {
+                <div class="row margin-bottom">
+                    <div class="col">
+                        <partial name="_question" model="@item" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

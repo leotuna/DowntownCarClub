@@ -1,0 +1,34 @@
+﻿@model DowntownCarClub.Web.Dtos.CreateQuestionDto 
+@{
+    ViewData["Title"] = "Ask a question - Downtown Car Club";
+}
+<div class="container">
+    <div class="row justify-content-start margin-bottom">
+        <div class="col">
+            <h1 class="font-lg font-normal">Ask a public question</h1>
+        </div>
+    </div>
+    <form method="post">
+        <div class="row margin-bottom">
+            <div class="col">
+                <div class="box">
+                    <div class="form-group form-group--full-width">
+                        <label>Title</label>
+                        <input type="text" asp-for="Title" required />
+                    </div>
+                    <div class="form-group form-group--full-width">
+                        <label>Content</label>
+                        <textarea rows="5" asp-for="Content" required></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <div class="col-auto">
+                <div class="form-group">
+                    <button type="submit" class="btn btn--m">Ask a question</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

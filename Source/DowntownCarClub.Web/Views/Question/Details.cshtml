@@ -1,0 +1,93 @@
+﻿@model DowntownCarClub.Web.Dtos.QuestionDetailsDto
+@{
+    ViewData["Title"] = $"{Model.Title} - Downtown Car Club";
+    var answers = Model.AnswerQuantity == 1 ? "1 Answer" : $"{Model.AnswerQuantity} Answers";
+    var currentRoute = ViewContext.HttpContext.Request.Path.Value;
+}
+<div class="container">
+    <div class="row justify-content-between flex-md-row-reverse">
+        <div class="col-lg-auto col-md-12 margin-bottom">
+            <a class="btn btn--m" asp-controller="Question" asp-action="Create">Ask a question</a>
+        </div>
+        <div class="col-lg-auto col-md-12 margin-bottom">
+            <h1 class="font-lg font-normal">
+                @Model.Title
+            </h1>
+            <span class="font-xsm color-faded">
+                @@<a class="link" asp-controller="User" asp-action="Details" asp-route-userName="@Model.UserName">@Model.UserName</a>
+                asked @Model.CreatedAt.ToString("dd/MM/yy HH:mm")
+            </span>
+        </div>
+    </div>
+    <div class="row margin-bottom-2">
+        <div class="col">
+            <div class="box">
+                <p class="font-sm">
+                    @Model.Content
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row margin-bottom">
+        <div class="col">
+            <h2 class="font-md font-normal">
+                @answers
+            </h2>
+        </div>
+    </div>
+    @foreach (var item in Model.Answers)
+    {
+        <div class="row margin-bottom">
+            <div class="col">
+                <div class="box">
+                    <div class="row justify-content-between margin-bottom-02">
+                        <div class="col-auto">
+                            <span class="font-xsm color-faded">
+                                @@<a class="link" asp-controller="User" asp-action="Details" asp-route-userName="@item.UserName">@item.UserName</a>
+                            </span>
+                        </div>
+                        <div class="col-auto color-faded">
+                            <span class="font-xsm">
+                                @item.CreatedAt.ToString("dd/MM/yy HH:mm")
+                            </span>
+                        </div>
+                    </div>
+                    <p class="font-sm">
+                        @item.Content
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row margin-bottom">
+        <div class="col">
+            <div class="box">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form asp-controller="Answer" asp-action="Create" asp-route-slug="@Model.Slug">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Your answer</label>
+                                    <textarea rows="5" name="Content"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-auto">
+                                <button type="submit" class="btn">Post answer</button>
+                            </div>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <p class="font-md text-center">
+                        <a class="link" asp-controller="Auth" asp-action="SignUp" asp-route-redirect="@currentRoute">Create an account</a>
+                        to answer this question.
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

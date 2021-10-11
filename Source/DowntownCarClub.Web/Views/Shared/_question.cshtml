@@ -1,0 +1,29 @@
+﻿@model DowntownCarClub.Web.Dtos.QuestionDto
+@{ 
+    var answers = Model.Answers == 1 ? "1 answer" : $"{Model.Answers} answers";
+}
+<div class="box">
+    <div class="container">
+        <div class="row margin-bottom">
+            <h2 class="box-header font-md">
+                <a asp-controller="Question" asp-action="Details" asp-route-slug="@Model.Slug">
+                    @Model.Title
+                </a>
+            </h2>
+        </div>
+        <div class="row justify-content-between align-items-end">
+            <div class="col">
+                <div class="row justify-content-start">
+                    <span class="font-xsm box-answers">@answers</span>
+                </div>
+            </div>
+            <div class="col justify-content-end">
+                <div class="row justify-content-end">
+                    <span class="box-person font-xsm">
+                        asked by @@<a asp-controller="User" asp-action="Details" asp-route-userName="@Model.UserName">@Model.UserName</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
